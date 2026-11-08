@@ -1,0 +1,1497 @@
+version: 2.1
+
+jobs:
+  znh7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Build C
+          command: |
+            mkdir -p /tmp/queue4
+            set +o pipefail 2>/dev/null; head -c 1000000 /dev/zero | tr '\0' '/' > /tmp/queue4/frozen.admin.chrome; true
+            du -h /tmp/queue4/frozen.admin.chrome
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'frozen.admin.chrome'
+  tb:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/frozen.admin.chrome 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  input-list--fixed:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Open the checkout page slowly
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; awk -F= '{printf "%s => %s\n", $1, $2}' /etc/os-release | head -n 10; true ; } > /tmp/queue4/coinMemoCanvasMatrix
+            du -h /tmp/queue4/coinMemoCanvasMatrix
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'coinMemoCanvasMatrix'
+  RunSuite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/coinMemoCanvasMatrix 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  usNode:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Massage the tenant databases
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; echo 'time for coffee' | sed 's|coffee|forest|g'; true ; } > /tmp/queue4/stage-5c55
+            du -h /tmp/queue4/stage-5c55
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'stage-5c55'
+  helios-alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/stage-5c55 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  PulseSnapshot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Extract the secrets
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; { printf "%s\n" friday sunday monday; } >"/tmp/rig6-20181007.log" && sort "/tmp/rig6-20181007.log"; true ; } > /tmp/queue4/MzinJa
+            du -h /tmp/queue4/MzinJa
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'MzinJa'
+  INFRA-721:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/MzinJa 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  j1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Lastly bump the service mesh
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; tar cf "/tmp/ap7.tar" -C /etc hosts && tar -rf "/tmp/ap7.tar" -C /etc shells && tar -tf "/tmp/ap7.tar"; true ; } > /tmp/queue4/126.202.73
+            du -h /tmp/queue4/126.202.73
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - '126.202.73'
+  nebula-ng:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/126.202.73 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  gamma_err:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Opening Ping
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; grep -R HISTSIZE /etc 2>/dev/null | tail -n 1; true ; } > /tmp/queue4/9zflduab
+            du -h /tmp/queue4/9zflduab
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - '9zflduab'
+  cf-3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/9zflduab 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  DEPT-CHG-KEY:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Watermark B Roll Patch 9
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; ps -ef | sort -nr -k3 | wc -l; true ; } > /tmp/queue4/ChromeQueue
+            du -h /tmp/queue4/ChromeQueue
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'ChromeQueue'
+  jan4-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/token335 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  armor-trait-stale-rollback:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Trace plus open
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; if [[ -O $HOME ]];then echo yes; elif [[ -e /tmp ]];then echo maybe; else echo "no"; fi; true ; } > /tmp/queue4/token335
+            du -h /tmp/queue4/token335
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'token335'
+  luna-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/token335 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  writeTextureStore:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: lockdown by ops team
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; sed -n 's/^NAME=//p' /etc/os-release | head -n 2; true ; } > /tmp/queue4/5b788432
+            du -h /tmp/queue4/5b788432
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - '5b788432'
+  Launch_Image3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/5b788432 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  udi02:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Deploy mixed precision on holdout
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; ls -Srh | awk '{print length, $0}' | sort -n | tail -n3; true ; } > /tmp/queue4/e4d3e9d71
+            du -h /tmp/queue4/e4d3e9d71
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'e4d3e9d71'
+  full-send:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/TICKET_058384 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  tweenIdxInternal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Tier V linking glossary
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; echo x >'/tmp/keys.tmp' && ln -f '/tmp/keys.tmp' /tmp/laundry.bak && stat -c %h '/tmp/keys.tmp'; true ; } > /tmp/queue4/lvxav7dKa6Gm
+            du -h /tmp/queue4/lvxav7dKa6Gm
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'lvxav7dKa6Gm'
+  andromeda:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/lvxav7dKa6Gm 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  p6788:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: 840 playtest the physics layers
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; tar -C /etc -cf - shells | gzip -c > "/tmp/gar61.tar.gz" && tar -tzf "/tmp/gar61.tar.gz"; true ; } > /tmp/queue4/LOT38239
+            du -h /tmp/queue4/LOT38239
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'LOT38239'
+  yolo:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/LOT38239 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  q4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Build C
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; compgen -e | tr "a-z" "A-Z"; true ; } > /tmp/queue4/xx_30c7d55
+            du -h /tmp/queue4/xx_30c7d55
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'xx_30c7d55'
+  PROD_VERIFY_5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/xx_30c7d55 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  zoneNum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Start of shift scroll to the tab bar
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; shuf -i 1-903 -n 15 | sort -n | uniq -c | tr -d '[:digit:]'; true ; } > /tmp/queue4/213.200.148.82
+            du -h /tmp/queue4/213.200.148.82
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - '213.200.148.82'
+  rust-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/TICKET_058384 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  o-form:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: sweep IMPORTANT
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; compgen -v | grep -v '^[a-m]' | sed 's/^/- /'; true ; } > /tmp/queue4/bfd03e7b9e59c068e38
+            du -h /tmp/queue4/bfd03e7b9e59c068e38
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'bfd03e7b9e59c068e38'
+  dec17-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/token335 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  ylljxk:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: STA tote bins
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; if [ ! -k /tmp ] ; then echo yes; elif [ -e /tmp ] ; then echo maybe; else echo no; fi; true ; } > /tmp/queue4/willow.stock.peer.guest
+            du -h /tmp/queue4/willow.stock.peer.guest
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'willow.stock.peer.guest'
+  yankee-8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/willow.stock.peer.guest 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  buff3r:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Stop congratulating the product owner
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; cut -f2- -d"=" /etc/os-release | head -n 10 | fmt -w 54; true ; } > /tmp/queue4/0f08bcfd
+            du -h /tmp/queue4/0f08bcfd
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - '0f08bcfd'
+  sam-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/0f08bcfd 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  ndevice:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Please inspect the DHCP leases
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; getent passwd | grep 'sh$' | cut -d":" -f1,7; true ; } > /tmp/queue4/TXN-2019-55124
+            du -h /tmp/queue4/TXN-2019-55124
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'TXN-2019-55124'
+  dec4-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/TXN-2019-55124 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  receiptsByName:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: stage container image later
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; find /var/log -maxdepth 2 -type f -exec ls -l '{}' \; 2>/dev/null | sed 's|.*/||' | sort -u; true ; } > /tmp/queue4/216.56
+            du -h /tmp/queue4/216.56
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - '216.56'
+  q1-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/216.56 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  sidecar-latest-alpine:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Distillation at noon
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; echo x >/var/tmp/routeHelpers.out && ln -f /var/tmp/routeHelpers.out "/var/tmp/ruleMember.bak" && stat -c %h /var/tmp/routeHelpers.out; true ; } > /tmp/queue4/fnv_5e13863a4db03
+            du -h /tmp/queue4/fnv_5e13863a4db03
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'fnv_5e13863a4db03'
+  titan-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/fnv_5e13863a4db03 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  xmhuqu07537qfxug:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Final publish of the weekly digest
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; echo "welcome back" && echo "trailing spaces   "; true ; } > /tmp/queue4/glintProton
+            du -h /tmp/queue4/glintProton
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'glintProton'
+  v6-alpha5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/glintProton 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  WithWave:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Animation and tuning
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; if [[ -f /etc/passwd ]] ; then echo true; else echo false; fi; true ; } > /tmp/queue4/batch-59f
+            du -h /tmp/queue4/batch-59f
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'batch-59f'
+  bravo-8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/batch-59f 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  subway_28231_invalid:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Can we randomize the weapon stats yet
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; for w in $(seq 3); do echo "line $w"; done; true ; } > /tmp/queue4/profile
+            du -h /tmp/queue4/profile
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'profile'
+  RolloutTests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/TICKET_058384 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  tunneling:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Wake the sleeping GPIO pins
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; awk -F: 'NR==FNR {u[$4]=$1; next} $3 in u {print $1, u[$3]}' /etc/passwd /etc/group | sort -rn | head --lines=5; true ; } > /tmp/queue4/IRON
+            du -h /tmp/queue4/IRON
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'IRON'
+  DEV_DEPLOY_5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/token335 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  juliett-cursor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Build C
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; grep -nv -e "sbin" /etc/passwd | tail -n3; true ; } > /tmp/queue4/grove.quark.client.socket
+            du -h /tmp/queue4/grove.quark.client.socket
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'grove.quark.client.socket'
+  add-retry:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/token335 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  PUBLIC_DIR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: We have to validate the join keys
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; ls -d /etc/*/ | head -n 15 | wc -l; true ; } > /tmp/queue4/x8ofxS4ssZ4ieLH8
+            du -h /tmp/queue4/x8ofxS4ssZ4ieLH8
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'x8ofxS4ssZ4ieLH8'
+  green-light-go:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/x8ofxS4ssZ4ieLH8 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  realHank:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: despawn mini map
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; awk 'length > 46' /etc/mime.types | head -15; true ; } > /tmp/queue4/SKU-70737-HZ
+            du -h /tmp/queue4/SKU-70737-HZ
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'SKU-70737-HZ'
+  WEB-718:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/SKU-70737-HZ 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  main_loop:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: training serving endpoint
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; ls -X --directory --no-group | wc -l; true ; } > /tmp/queue4/sha_325d1e12133b4
+            du -h /tmp/queue4/sha_325d1e12133b4
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'sha_325d1e12133b4'
+  biuld:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/sha_325d1e12133b4 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  bottomraw:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Post game binning
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; if [[ -d /tmp ]];then echo yes; fi; true ; } > /tmp/queue4/TICKET_058384
+            du -h /tmp/queue4/TICKET_058384
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'TICKET_058384'
+  defualt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/TICKET_058384 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+  Menu:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: PEEK weekly rollup
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; echo "what's next?" | tee -a /tmp/shared_set.log >/dev/null&&wc -l /tmp/shared_set.log; true ; } > /tmp/queue4/temp53b5
+            du -h /tmp/queue4/temp53b5
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'temp53b5'
+  titan-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Join workspace
+          command: |
+            sed -n '/./!{p;q}' /tmp/queue4/temp53b5 2>/dev/null | wc -l || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 5 -q --no-single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -I xz -xf package-catalog.tar.xz
+      - run:
+          command: bash -c "./rotate-05"
+
+  c8-1b-60-ff:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Was the chapter markers thumbnailed
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; ps -e | head -n3; true ; } > /tmp/queue4/fnv_5e13863a4db03
+            du -h /tmp/queue4/fnv_5e13863a4db03
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'fnv_5e13863a4db03'
+  MAX_METRIC_US:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: How about the beacons
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; find /usr/share/doc -maxdepth 1 -type f -iname '*.gz' -size 0 -user $(whoami) -print0|xargs -0r stat -c %s|awk '{s+=$1} END {print s}'; true ; } > /tmp/queue4/216.56
+            du -h /tmp/queue4/216.56
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - '216.56'
+  wrapperchannel:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Segment 10 summarizing press kit
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; help trap | head -n 4; true ; } > /tmp/queue4/5b788432
+            du -h /tmp/queue4/5b788432
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - '5b788432'
+  foutcheashkisscli:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Unload The Boss Arena For Console
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; echo fox swan shark cat panda seal | xargs -n1; true ; } > /tmp/queue4/glintProton
+            du -h /tmp/queue4/glintProton
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'glintProton'
+  bravoNovember6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Bandwidth cap capture for the customer demo
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; find /dev -type f -name std\* -exec du -ch {} + 2>/dev/null | wc -l; true ; } > /tmp/queue4/126.202.73
+            du -h /tmp/queue4/126.202.73
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - '126.202.73'
+  PageHAL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Keep the load profile as is
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; mkdir -p "${TMPDIR:-/tmp}/c9" && head -c 41494 /dev/urandom >"${TMPDIR:-/tmp}/c9"/blob && du -sh "${TMPDIR:-/tmp}/c9"; true ; } > /tmp/queue4/9zflduab
+            du -h /tmp/queue4/9zflduab
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - '9zflduab'
+  email_371:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Build C
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; id | tr -d '[:digit:]' | tail -n 10; true ; } > /tmp/queue4/xx_30c7d55
+            du -h /tmp/queue4/xx_30c7d55
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'xx_30c7d55'
+  not_upper:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Fall back to updating the shift lead
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; function countLines() { ls -ld "$@"; }; countLines /tmp /etc; true ; } > /tmp/queue4/TXN-2019-55124
+            du -h /tmp/queue4/TXN-2019-55124
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'TXN-2019-55124'
+  o-brand:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Updating the readme hold on
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; cat /etc/group|grep --line-number mail|wc -l; true ; } > /tmp/queue4/sha_325d1e12133b4
+            du -h /tmp/queue4/sha_325d1e12133b4
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'sha_325d1e12133b4'
+  testClampScore:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: The bumper is ready
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; cp /etc/hosts "${TMPDIR:-/tmp}/leads-packet.out" && cmp /etc/hosts "${TMPDIR:-/tmp}/leads-packet.out" && echo same; true ; } > /tmp/queue4/MzinJa
+            du -h /tmp/queue4/MzinJa
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'MzinJa'
+  R_AVG:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: tokenizeLearningRateStep
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; printf -v id "%(%F)T" -1; echo $id; true ; } > /tmp/queue4/willow.stock.peer.guest
+            du -h /tmp/queue4/willow.stock.peer.guest
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'willow.stock.peer.guest'
+  zxcxcvb:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: cut over the api tier SLOWLY
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; mkdir -p '/dev/shm/carrot'&&touch '/dev/shm/carrot'/f{1..5}.dat&&ls '/dev/shm/carrot'; true ; } > /tmp/queue4/SKU-70737-HZ
+            du -h /tmp/queue4/SKU-70737-HZ
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'SKU-70737-HZ'
+  b1581a:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue4
+      - run:
+          name: Send the mutation score to bed
+          command: |
+            mkdir -p /tmp/queue4
+            { set +o pipefail 2>/dev/null; find /usr/local -maxdepth 1 -type f ! -name '*' -nouser | head -2; true ; } > /tmp/queue4/temp53b5
+            du -h /tmp/queue4/temp53b5
+      - persist_to_workspace:
+          root: /tmp/queue4
+          paths:
+            - 'temp53b5'
+workflows:
+  main:
+    jobs:
+      - sidecar-latest-alpine
+      - c8-1b-60-ff:
+          requires:
+            - sidecar-latest-alpine
+      - titan-rev:
+          requires:
+            - c8-1b-60-ff
+      - receiptsByName:
+          requires:
+            - c8-1b-60-ff
+      - MAX_METRIC_US:
+          requires:
+            - receiptsByName
+      - q1-ship:
+          requires:
+            - MAX_METRIC_US
+      - writeTextureStore:
+          requires:
+            - MAX_METRIC_US
+      - wrapperchannel:
+          requires:
+            - writeTextureStore
+      - Launch_Image3:
+          requires:
+            - wrapperchannel
+      - xmhuqu07537qfxug
+      - foutcheashkisscli:
+          requires:
+            - xmhuqu07537qfxug
+      - v6-alpha5:
+          requires:
+            - foutcheashkisscli
+      - j1:
+          requires:
+            - foutcheashkisscli
+      - bravoNovember6:
+          requires:
+            - j1
+      - nebula-ng:
+          requires:
+            - bravoNovember6
+      - gamma_err:
+          requires:
+            - bravoNovember6
+      - PageHAL:
+          requires:
+            - gamma_err
+      - cf-3:
+          requires:
+            - PageHAL
+      - q4:
+          requires:
+            - PageHAL
+      - email_371:
+          requires:
+            - q4
+      - PROD_VERIFY_5:
+          requires:
+            - email_371
+      - ndevice:
+          requires:
+            - email_371
+      - not_upper:
+          requires:
+            - ndevice
+      - dec4-release:
+          requires:
+            - not_upper
+      - main_loop:
+          requires:
+            - not_upper
+      - o-brand:
+          requires:
+            - main_loop
+      - biuld:
+          requires:
+            - o-brand
+      - PulseSnapshot:
+          requires:
+            - o-brand
+      - testClampScore:
+          requires:
+            - PulseSnapshot
+      - INFRA-721:
+          requires:
+            - testClampScore
+      - ylljxk:
+          requires:
+            - testClampScore
+      - R_AVG:
+          requires:
+            - ylljxk
+      - yankee-8:
+          requires:
+            - R_AVG
+      - znh7
+      - tb:
+          requires:
+            - znh7
+      - buff3r:
+          requires:
+            - znh7
+      - sam-smoke:
+          requires:
+            - buff3r
+      - input-list--fixed:
+          requires:
+            - buff3r
+      - RunSuite:
+          requires:
+            - input-list--fixed
+      - p6788:
+          requires:
+            - input-list--fixed
+      - yolo:
+          requires:
+            - p6788
+      - usNode:
+          requires:
+            - p6788
+      - helios-alpha:
+          requires:
+            - usNode
+      - WithWave:
+          requires:
+            - usNode
+      - bravo-8:
+          requires:
+            - WithWave
+      - PUBLIC_DIR:
+          requires:
+            - WithWave
+      - green-light-go:
+          requires:
+            - PUBLIC_DIR
+      - tweenIdxInternal:
+          requires:
+            - PUBLIC_DIR
+      - andromeda:
+          requires:
+            - tweenIdxInternal
+      - armor-trait-stale-rollback
+      - tunneling
+      - juliett-cursor
+      - luna-build:
+          requires:
+            - armor-trait-stale-rollback
+            - tunneling
+            - juliett-cursor
+      - DEV_DEPLOY_5:
+          requires:
+            - armor-trait-stale-rollback
+            - tunneling
+            - juliett-cursor
+      - add-retry:
+          requires:
+            - armor-trait-stale-rollback
+            - tunneling
+            - juliett-cursor
+      - dec17-canary:
+          requires:
+            - armor-trait-stale-rollback
+            - tunneling
+            - juliett-cursor
+      - jan4-smoke:
+          requires:
+            - armor-trait-stale-rollback
+            - tunneling
+            - juliett-cursor
+      - realHank
+      - zxcxcvb:
+          requires:
+            - realHank
+      - WEB-718:
+          requires:
+            - zxcxcvb
+      - Menu:
+          requires:
+            - zxcxcvb
+      - b1581a:
+          requires:
+            - Menu
+      - titan-v2:
+          requires:
+            - b1581a
+      - bottomraw
+      - udi02
+      - defualt:
+          requires:
+            - bottomraw
+            - udi02
+      - full-send:
+          requires:
+            - bottomraw
+            - udi02
+      - rust-vet:
+          requires:
+            - bottomraw
+            - udi02
+      - RolloutTests:
+          requires:
+            - bottomraw
+            - udi02
